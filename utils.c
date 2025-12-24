@@ -1,41 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vbc.h                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isahmed <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/24 14:53:15 by isahmed           #+#    #+#             */
-/*   Updated: 2025/12/24 15:50:42 by isahmed          ###   ########.fr       */
+/*   Created: 2025/12/24 15:47:18 by isahmed           #+#    #+#             */
+/*   Updated: 2025/12/24 15:49:35 by isahmed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VBC_H
+#include "vbc.h"
 
-# define VBC_H
-
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <ctype.h>
-
-enum e_type
+void	ft_exit_cleanup(char *tokens)
 {
-	DIGIT,
-	O_BRACKET,
-	C_BRACKET,
-	OPERATION	
-};
+	int	i;
 
-typedef struct s_token
+	i = -1;
+	// while (tokens[i])
+	free(tokens);
+	exit(1);
+}
+
+int validate(char *str)
 {
-	char		val;
-	enum e_type	type;
+	int	i;
+	
+	i = -1;
+	while (str[++i])
+		if (!isdigit(str[i]) &&  str[i] != '(' && str[i] != ')' && str[i] != '+' && str[i] != '*')
+			return (1);
+	return (0);
+}
 
-}	t_token;
+int	ft_strlen(char *s)
+{
+	int	i;
 
-void	ft_exit_cleanup(char *tokens);
-int		validate(char *str);
-int		ft_strlen(char *s);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
 
-#endif 
